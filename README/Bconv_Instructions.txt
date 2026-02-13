@@ -1,0 +1,62 @@
+BCONV 1.1 - Instructions
+------------------------
+
+Platform: HP49G
+Language: UserRPL
+Version: 1.1 
+Checksum: # C7BFh
+Bytes: 1933.
+
+Description:
+This program converts a number on base A to base B, where 2 <= {A, B} <= 36. 
+The program supports decimal arithmetic on inputs and outputs. It will display all digits.  
+
+The base conversion algorithm used is as follows: 
+
+To convert a number N from base A to base B, 
+  (a) The series substitution method with base 10 arithmetic is used to convert N from base A to base 10, and
+  (b) the radix divide or multiply with decimal arithmetic is used to convert N from base 10 to base B.
+
+Installation: 
+Just send the file BCONV to the calculator in binary mode to HOME or any subdirectory you want. 
+
+Usage: (assumes RPN mode)  
+There are two ways to input the number to convert on the stack: as a regular number (integer or real) or as a string. The string input becomes useful for bases > 10 and/or when entering real numbers with more than 12 digits.    
+The program requires 3 numbers on the stack as inputs. Enter the number, N followed by the current base and finally the base you want the number to be converted to.   
+
+Example:
+4123.0563			"-95CE4.23A"
+7				18
+15				5
+
+Output
+
+b7:4123.0563			b18:"-95CE4.23A"
+b10:"1438.120783007081"		b10:"-978088.122085048011"
+b15:"65D.1C2998E1794A"		b5:"-222244323.030112242134"
+
+Note:
+The intermediate base 10 of N is always displayed. 
+If you enter non-integers base values, only the integer portion will be considered.   
+
+Version History 
+1.1	05/31/2002	Added error handling routines for invalid inputs.
+			Improved precision on decimal arithmetic. 
+			Corrected bug that prevented all numbers to be 
+			displayed on large numbers (>9.99999999999E11)
+			Now also accepts inputs as 1.25E12.
+			Signs are shown now.
+			Code clean-up and small Bug fixes. 
+
+1.0	05/16/2002	Initial Release.
+
+
+To do list: 
+- Speed optimizations 
+
+
+If you find any bugs or ways to improve the program please let me know at terzano@email.com. The source code is provided in the file BCONV.ASC
+
+
+I hope you find this program useful, 
+Diego Terzano    
