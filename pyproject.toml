@@ -3,9 +3,9 @@ requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
 [project]
-name = "dozenal-system"
-version = "0.1.0"
-description = "Exact base conversion library and CLI using base-marker generic notation"
+name = "basekit"
+version = "0.2.0"
+description = "Exact base conversion toolkit with ergonomic base contexts"
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
@@ -20,13 +20,14 @@ classifiers = [
 ]
 
 [project.scripts]
-dozenal = "dozenal_system.cli:main"
+basekit = "basekit.cli:main"
+dozenal = "basekit.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "build>=1.2"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/dozenal_system"]
+packages = ["src/basekit"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

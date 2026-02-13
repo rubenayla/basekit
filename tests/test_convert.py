@@ -1,7 +1,7 @@
 from fractions import Fraction
 
-from dozenal_system import convert, equivalence_chain, from_fraction, parse_generic, to_fraction
-from dozenal_system.notation import format_converted
+from basekit import base, convert, dozenal, equivalence_chain, from_fraction, parse_generic, to_fraction
+from basekit.notation import format_converted
 
 
 def test_core_conversion_examples() -> None:
@@ -45,3 +45,23 @@ def test_to_fraction_exact() -> None:
     parsed = parse_generic("b_10.6")
     value = to_fraction(parsed)
     assert value == Fraction(25, 2)
+
+
+def test_context_parse_calls() -> None:
+    assert dozenal(100) == 144
+    assert base(3)(10) == 3
+    assert dozenal("10.6") == Fraction(25, 2)
+
+
+def test_context_parse_invalid_digit() -> None:
+    try:
+        base(3)(39)
+        assert False, "Expected ValueError"
+    except ValueError:
+        pass
+
+
+def test_context_fmt() -> None:
+    assert dozenal.fmt(144) == "100"
+    assert dozenal.fmt(144, marked=True) == "b_100"
+    assert base(10).fmt(Fraction(1, 3)) == "0.(3)"

@@ -1,4 +1,4 @@
-from dozenal_system.notation import parse_generic
+from basekit.notation import parse_generic
 
 
 def test_parse_generic_basic() -> None:

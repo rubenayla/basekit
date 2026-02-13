@@ -1,4 +1,4 @@
-"""Command-line interface for dozenal-system conversions."""
+"""Command-line interface for basekit conversions."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from .convert import convert, equivalence_chain
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="dozenal", description="Convert numbers across bases 2..36")
+    parser = argparse.ArgumentParser(prog="basekit", description="Convert numbers across bases 2..36")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     convert_parser = subparsers.add_parser("convert", help="Convert one canonical value")
@@ -34,7 +34,7 @@ def main(argv: list[str] | None = None) -> int:
 
         parser.error("Unknown command")
         return 2
-    except ValueError as exc:
+    except (TypeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

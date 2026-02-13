@@ -1,6 +1,6 @@
-# Dozenal System
+# basekit
 
-Dozenal project extracted from the broader `new_system` idea.
+General base-conversion toolkit extracted from the broader `new_system` idea, with a fast preset for dozenal use.
 
 ## Python package and CLI
 
@@ -38,22 +38,34 @@ pip install -e .
 ### Library quickstart
 
 ```python
-from dozenal_system import convert, equivalence_chain
+from fractions import Fraction
+from basekit import base, dozenal as doz, convert, equivalence_chain
 
 print(convert("b_10", 10))             # 9_12
 print(convert("2_0.1", 10))            # 9_0.(3)
 print(equivalence_chain("b_10", [12, 10]))
 # b_10 = 9_12 = 12
+
+print(doz(100))                        # 144
+print(base(3)(10))                     # 3
+print(doz("10.6"))                     # Fraction(25, 2)
+
+print(doz.fmt(144))                    # 100
+print(doz.fmt(144, marked=True))       # b_100
+print(base(10).fmt(Fraction(1, 3)))    # 0.(3)
 ```
 
 ### CLI quickstart
 
 ```bash
-dozenal convert b_10 --to-base 10
+basekit convert b_10 --to-base 10
 # 9_12
 
-dozenal chain b_10 --bases 12,10
+basekit chain b_10 --bases 12,10
 # b_10 = 9_12 = 12
+
+# alias still available
+dozenal convert b_10 --to-base 10
 ```
 
 ### Exactness and repeating output
