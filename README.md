@@ -2,6 +2,67 @@
 
 Dozenal project extracted from the broader `new_system` idea.
 
+## Python package and CLI
+
+This repo now includes a Python package and CLI for exact base conversion using the generic notation:
+
+`<base-marker>_<number>`
+
+Base marker rule:
+- Marker is the digit for `(base - 1)`, using `0123456789abcdefghijklmnopqrstuvwxyz`
+- Base 10 marker is `9`
+- Base 12 marker is `b`
+- Output digits and markers are lowercase
+
+Examples:
+- `b_10` means `10` in base 12 (decimal `12`)
+- `9_12` means `12` in base 10 (decimal `12`)
+- Chain target: `b_10 = 9_12 = 12`
+
+### Base marker examples
+
+| Base | Marker | Example |
+| --- | --- | --- |
+| 2 | `1` | `1_101` |
+| 10 | `9` | `9_12` |
+| 12 | `b` | `b_10` |
+| 16 | `f` | `f_ff` |
+| 36 | `z` | `z_z` |
+
+### Install (local)
+
+```bash
+pip install -e .
+```
+
+### Library quickstart
+
+```python
+from dozenal_system import convert, equivalence_chain
+
+print(convert("b_10", 10))             # 9_12
+print(convert("2_0.1", 10))            # 9_0.(3)
+print(equivalence_chain("b_10", [12, 10]))
+# b_10 = 9_12 = 12
+```
+
+### CLI quickstart
+
+```bash
+dozenal convert b_10 --to-base 10
+# 9_12
+
+dozenal chain b_10 --bases 12,10
+# b_10 = 9_12 = 12
+```
+
+### Exactness and repeating output
+
+- Conversion uses exact rational arithmetic (`fractions.Fraction`)
+- No float fallback by default
+- Non-terminating expansions are emitted as repeating notation:
+  - `1/3` in base 10 -> `9_0.(3)`
+
 # Base 12, Dozenal
 12 has twice as many (non-trivial) divisors as 10:
 
@@ -465,4 +526,3 @@ I think I prefer to just say do-meter mo-meter bi-mo-meter, emo-meter..., writte
     plt.show()
     ```
     
-
