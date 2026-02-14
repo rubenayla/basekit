@@ -51,6 +51,10 @@ def test_context_parse_calls() -> None:
     assert dozenal(100) == 144
     assert base(3)(10) == 3
     assert dozenal("10.6") == Fraction(25, 2)
+    assert dozenal("b_100") == 144
+    assert dozenal("9_144") == 144
+    assert base(10)("9_144") == 144
+    assert base(3)("b_100") == 144
 
 
 def test_context_parse_invalid_digit() -> None:

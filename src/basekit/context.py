@@ -11,8 +11,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 
-from .convert import from_fraction
+from .convert import from_fraction, to_fraction
 from .digits import char_to_value, validate_base
+from .notation import parse_generic
 
 
 @dataclass(frozen=True)
@@ -29,6 +30,7 @@ class BaseContext:
 
         - int input is interpreted as a digit-sequence token (e.g., 100 in base 12 -> 144)
         - str input supports optional leading sign and optional single '.'
+        - str input also accepts canonical marker notation, e.g. 'b_100' or '9_144'
         """
         if isinstance(value, int):
             token = str(value)
@@ -39,6 +41,10 @@ class BaseContext:
 
         if token == "":
             raise ValueError("Empty token")
+
+        if isinstance(value, str) and "_" in token:
+            exact = to_fraction(parse_generic(token))
+            return int(exact) if exact.denominator == 1 else exact
 
         sign = -1 if token.startswith("-") else 1
         unsigned = token[1:] if sign < 0 else token

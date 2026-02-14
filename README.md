@@ -49,6 +49,8 @@ print(equivalence_chain("b_10", [12, 10]))
 print(doz(100))                        # 144
 print(base(3)(10))                     # 3
 print(doz("10.6"))                     # Fraction(25, 2)
+print(doz("b_100"))                    # 144
+print(base(10)("9_144"))               # 144
 
 print(doz.fmt(144))                    # 100
 print(doz.fmt(144, marked=True))       # b_100
